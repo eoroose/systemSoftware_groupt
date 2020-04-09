@@ -3,11 +3,11 @@ all:
 	gcc exercise_2.c -o exercise_2.o
 	gcc exercise_3.c -o exercise_3.o
 
-run_ex_1:
+run_ex1:
 	./exercise_1.o
-run_ex_2:
+run_ex2:
 	./exercise_2.o
-run_ex_3:
+run_ex3:
 	./exercise_3.o
 
 clean:

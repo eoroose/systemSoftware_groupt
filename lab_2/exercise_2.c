@@ -1,21 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void swap_pointers(void **ptr1, void **ptr2) {
-    void *temp = *ptr1;
-    *ptr1 = *ptr2;
-    *ptr2 = temp;
+typedef struct {
+    short day, month;
+    unsigned year;
+} date_t;
+
+void f(void) {
+    int x, y, z;
+    printf("%d %d %d\n", x, y, z );
+}
+
+date_t *date_struct(int day, int month, int year) {
+    static date_t dummy;
+    dummy.day = (short)day;
+    dummy.month = (short)month;
+    dummy.year = (unsigned)year;
+    return &dummy;
 }
 
 int main(void) {
-    int a = 1;
-    int b = 2;
-    void *p = &a;
-    void *q = &b;
-    printf("address of p = %p and q = %p\n", p, q);
-    // prints p = &a and q = &b
-    swap_pointers(&p, &q);
-    printf("address of p = %p and q = %p\n", p, q);
-    // prints p = &b and q = &a
+    int day, month, year;
+    date_t *d;
+    printf("\nGive day, month, year:");
+    scanf("%d %d %d", &day, &month, &year);
+    d = date_struct(day, month, year);
+    f();
+    printf("\ndate struct values: %d-%d-%d", d->day, d->month, d->year);
     return 0;
-}   
+}
