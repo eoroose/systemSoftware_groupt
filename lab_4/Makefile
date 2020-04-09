@@ -1,11 +1,15 @@
 all:
-	gcc main.c ma_malloc.c -o main.o
+	gcc -g main.c ma_malloc.c -o main.o -Wall -std=c11 -Werror
+
 
 run:
 	./main.o
 
 test:
-	cppcheck main.c ma_malloc.c --enable=all --suppress=missingIncludeSystem ./main.o
+	cppcheck --enable=all --suppress=missingIncludeSystem main.c ma_malloc.c
+
+gdb:
+	gdb -tui main.o
 
 clean:
 	rm -rf *.o

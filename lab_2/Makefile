@@ -14,6 +14,6 @@ run_main:
 	./main.o
 
 test_main:
-	cppcheck main.c --enable=all --suppress=missingIncludeSystem ./main.o
+	cppcheck --enable=all --suppress=missingIncludeSystem main.c
 clean:
 	rm -rf *.o
