@@ -1,7 +1,6 @@
 all:
 	gcc -g main.c ma_malloc.c -o main.o -Wall -std=c11 -Werror
 
-
 run:
 	./main.o
 
