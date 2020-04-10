@@ -10,7 +10,7 @@ run: file_creator
 
 test:
 	cppcheck --enable=all --suppress=missingIncludeSystem sensor_db.c sensor_db.h
-	valgrind --leak-check=full ./sensor_database
+	valgrind --leak-check=full ./main.o
 
 clean:
 	rm -rf *.o *.map *.db* sensor_data* *.log
