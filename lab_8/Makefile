@@ -5,8 +5,7 @@ all: lib_dplist lib_tcpsock sensor_node
 	gcc main.c connmgr.c config.h lib/tcpsock.c lib/dplist.c -DTIMEOUT=5 -o main.o
 
 sensor_node:
-	gcc -c sensor_node.c -Wall -std=c11 -Werror -o sensor_node.o -fdiagnostics-color=auto
-	gcc sensor_node.o -ltcpsock -o sensor_node -Wall -L./lib -Wl,-rpath=./lib -fdiagnostics-color=auto
+	gcc sensor_node.c config.h lib/tcpsock.c -Wall -std=c11 -Werror -o sensor_node.o -fdiagnostics-color=auto
 	
 lib_dplist:
 	gcc -c lib/dplist.c -Wall -std=c11 -Werror -fPIC -o lib/dplist.o -fdiagnostics-color=auto
@@ -19,11 +18,11 @@ lib_tcpsock:
 sensors:
 	@echo "$(TITLE_COLOR)\n***** five sensors running *****$(NO_COLOR)"
 	sleep 2
-	./sensor_node 15 1 127.0.0.1 5678 &
-	./sensor_node 21 2 127.0.0.1 5678 &
-	./sensor_node 37 3 127.0.0.1 5678 &
-	./sensor_node 49 4 127.0.0.1 5678 &
-	./sensor_node 112 5 127.0.0.1 5678 &
+	./sensor_node.o 15 1 127.0.0.1 5678 &
+	./sensor_node.o 21 2 127.0.0.1 5678 &
+	./sensor_node.o 37 3 127.0.0.1 5678 &
+	./sensor_node.o 49 4 127.0.0.1 5678 &
+	./sensor_node.o 112 5 127.0.0.1 5678 &
 	sleep 30
 	pkill sensor_node -f -e -c
 
@@ -35,4 +34,4 @@ test:
 	valgrind -s --leak-check=full ./main.o
 
 clean:
-	rm -rf *.o lib/*.o lib/*.so sensor_data_recv sensor_node
+	rm -rf *.o lib/*.o lib/*.so sensor_data_recv
